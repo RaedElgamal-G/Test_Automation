@@ -47,7 +47,7 @@ on:
 
 jobs:
   Registration_E2E_First_Test:
-    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || inputs.OSRun1 }}-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'ubuntu-latest' || inputs.OSRun1 == 'ubuntu' && 'ubuntu-latest' || 'windows-latest' }}
     permissions:
       checks: write
 
@@ -79,7 +79,7 @@ jobs:
           reporter: java-junit
 
   Registration_E2E_Second_Test:
-    runs-on: ${{ github.event_name == 'pull_request' && 'windows-latest' || inputs.OSRun2 }}-latest
+    runs-on: ${{ github.event_name == 'pull_request' && 'windows-latest' || inputs.OSRun2 == 'ubuntu' && 'ubuntu-latest' || 'windows-latest' }}
     permissions:
       checks: write
 
