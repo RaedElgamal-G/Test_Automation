@@ -1,6 +1,6 @@
 name: Registration_E2E_Test
   
-  <!-- Testing yml file-->
+  <!-- Testing 2 yml file-->
 
 on:
    workflow_dispatch:
