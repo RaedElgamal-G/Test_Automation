@@ -66,8 +66,13 @@ jobs:
         with:
           maven-version: 3.9.9
 
-      - name: Execute Tests
-        run: mvn -DBrowserName="${{ github.event_name == 'pull_request' && 'chrome' || inputs.BrowserRun1 }}" -Dtest="${{ github.event_name == 'pull_request' && 'chrome' || inputs.testsPath }}" test
+      - name: Execute Tests if
+        if: ${{ inputs.OSRun2 == 'windows' }}
+        run: mvn -DBrowserName="${{ github.event_name == 'pull_request' && 'edge' || inputs.BrowserRun2 }}" -DHeadLessBrowsing="false" -Dtest="${{ github.event_name == 'pull_request' && 'chrome' || inputs.testsPath }}" test
+
+      - name: Execute Tests if
+        if: ${{ inputs.OSRun2 == 'ubuntu' }}
+        run: mvn -DBrowserName="${{ github.event_name == 'pull_request' && 'edge' || inputs.BrowserRun2 }}" -DHeadLessBrowsing="true" -Dtest="${{ github.event_name == 'pull_request' && 'chrome' || inputs.testsPath }}" test
 
       - name: Publish Report
         continue-on-error: true
